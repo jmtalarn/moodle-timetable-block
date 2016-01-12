@@ -1,0 +1,40 @@
+﻿<h1>Editing Groups</h1>
+
+<p>From this page you can add, modify and delete the groups and his timetables for each course in the institution.</p>
+
+<p><b>Add a group</b> - from this section you can add a new group pressing the <b>Add a new group</b> button. <br>
+The parameters needed to well define a group are:<br>
+	<ul>
+		<li><b>name</b> - the name used for identify a group from each other.</li>
+		<li><b>students number</b> - the maximum students number allowed to be joined to group.</li>
+		<li><b>group change allowed</b> - the teacher can decide if a student can take off from the group himself or if only teachers can take off.</li>
+		<li><b>common group</b> - a common group is a group that once enlisted the user can join any other. <br/>
+		For a non common group a user can only be enlisted in one of them, and if joins another group it will be taked off from the first. </li>
+	</ul>
+</p>
+
+<p><b>Edit group</b> - from this section you can modify or delete an existing group. <br>
+This is a list of all available classrooms. No classrooms available message wil be displayed if no classrooms were added.<br>
+Two actions can be token changing Action Commbo value
+	<ul>
+		<li><b>Update group</b> - the name,students number, change allowed and common group parameters can be modified by each row in list but only will be updated if this action is selected in Combo Action and Action Button is pressed.</li>
+		<li><b>Delete group</b> - the group will be deleted if this action is selected and Action Button is pressed. A confirm screen will ask you to confirm the action.</li>
+		<li><b>Add all course students</b> - all students in course will be enlisted once Action Button is pressed. A confirm screen will ask you to confirm the action.</li>
+		<li><b>Edit hourtable group</b> - this action takes you to the group timetable editing screen.</li>
+	</ul>
+
+</p>
+
+<p><b>Edit hourtable group</b> - from this section you can modify the timetable for the selected group. <br>
+In the first section you can take the same actions than in Edit group section but only for the group selected.
+In the second section a week representation ( weekend days in red text) is showed with all hours that institution is giving classes.
+For each cell one of this two actions can be toke:
+	<ul>
+			<li><b>Add <img src="../../../icons/action_gop.gif" width="16" height="16" title="Add action icon" ></b> - If this action is possible a combo with the classrooms available in the institution for this hour is showed.<br>
+						A class can be added selecting the apropiate classroom and Add icon is pressed.<br>
+						If the classroom capacity is less than students number expected a warning message in blue is showed at the top section and class is added in blue text.<br>
+						If the class is added in a considered weekend day a warning message in blue is showed at the top section and class is added in blue text.
+			</li>
+			<li><b>Delete <img src="../../../icons/action_stop.gif" width="16" height="16" title="Delete action icon" ></b> - If a class was added you can delete pressing the Delete icon.</li>
+	</ul>
+</p>

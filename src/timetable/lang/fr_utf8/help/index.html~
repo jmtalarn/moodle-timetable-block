@@ -1,0 +1,7 @@
+<h2>Horaire</h2>
+<ul>
+  <li><a href="help.php?module=timetable&amp;file=editclassroom.html">Modifier les salles de classe</a></li>
+  <li><a href="help.php?module=timetable&amp;file=editclasshours.html">Modifier les heures de classe</a></li>
+  <li><a href="help.php?module=timetable&amp;file=editgroup.html">Modifier les groupes et son horaire</a></li>
+  <li><a href="help.php?module=timetable&amp;file=viewgroup.html">En regardent les groupes et ses élèves</a></li>
+</ul>

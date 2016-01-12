@@ -1,0 +1,135 @@
+<?php
+
+print_header_simple(get_string('editclasshours','block_timetable'),'',	get_string('editclasshours','block_timetable'),'','',false);		
+
+include('../tabs.php');
+?>
+<?php
+/****************************/
+/*NEW CLASSHOUR FORM*********/
+/****************************/
+?>
+<div class="sideblock">
+<div class="header">
+	<h3><?php echo get_string('classhourstable','block_timetable')?></h3>
+</div>
+<div class="content">
+<form action = "../controller/ttcontroller.php?viewrequired=editclasshours" method = "POST">
+	<input type="hidden" name="sesskey" value="<?php echo $USER->sesskey ?>" >
+	<input type="hidden" name="courseid" value="<?php echo $courseid ?>" >
+	<input type="hidden" name="timetableid" value="<?php echo $timetableid ?>" >
+	
+	<input type="hidden" name="actionparam" value="addclasshour" >
+<?php	
+	echo get_string('starthour','block_timetable');
+	print_time_selector('starthr', 'startmin');
+	echo get_string('endhour','block_timetable');	
+	print_time_selector('endhr', 'endmin');
+?>
+	<input value="<?php echo get_string('addnewclasshour','block_timetable') ?>" type="submit"> &nbsp;
+</form>
+<BR>
+
+<?php
+/************************************/
+/*CLASSHOURS TABLE ******************/
+/************************************/
+/*DL[]*DM[]*DX[]*DJ[]*DV[]*DS[]*DG[]*/
+/************************************//* -->[Apply these work days] */
+/* Classhours                       *//* -->[Delete this Classhour] */
+/************************************/
+?>
+
+
+<?php
+if ( $classhours=='' ){
+	echo get_string('noclasshours','block_timetable');
+?>
+	<BR>
+<?php
+}else{
+?>	
+	<table class="flexible generaltable generalbox " >
+
+	<tr>
+	<th class="header c0" scope="col"></th>
+<?php
+	for($i = $display->minwday; $i <= $display->maxwday; ++$i) {
+	 // This uses the % operator to get the correct weekday no matter what shift we have
+	 // applied to the $display->minwday : $display->maxwday range from the default 0 : 6		
+		if(CALENDAR_WEEKEND & (1 << ($i % 7))) {
+?>
+			<th class="header" style="text-align: center;color:red; width: 95px;"  scope="col" >
+<?php	        		
+		}else{
+?>  
+	        <th class="header" style="text-align: center; width: 95px;"  scope="col" >
+<?php
+		}
+?>   
+	    <P><?php echo get_string($CALENDARDAYS[$i % 7], 'calendar')?></P>
+		</th>
+<?php	
+	}
+?>
+	<th class="header" scope="col"></th>
+	
+	</tr>
+<?php	
+	$firsthour = true;
+	
+		foreach ($classhours as $classhour){
+			if(!$firsthour){
+				$diferencia = ((strtotime($classhour->starthour))-(strtotime($oldclasshour->endhour)));
+				if ($diferencia>=1200 ){
+					for ($i = 0; $i < $diferencia; ($i=$i+1200)) {
+?>
+     					<TR><TD class="cell c0" colspan="9" rowspan="1"></TD></TR>
+<?php
+ 					}
+ 				}
+			}
+?>		
+		
+	<form action = "../controller/ttcontroller.php?viewrequired=editclasshours" method = "POST">
+			<input type="hidden" name="sesskey" value="<?php echo $USER->sesskey ?>" >
+			<input type="hidden" name="courseid" value="<?php echo $courseid ?>" >
+			<input type="hidden" name="timetableid" value="<?php echo $timetableid ?>" >
+			
+			<input type="hidden" name="actionparam" value="delclasshour" >
+			<input type="hidden" name="starthour" value="<?php echo $classhour->starthour ?>" >
+			<input type="hidden" name="endhour" value="<?php echo $classhour->endhour ?>" >
+				<TR>
+				<TD class="cell c0" style="text-align: center;width: 95px;">
+<?php
+				echo strftime ( "%H:%M", strtotime($classhour->starthour));
+?>
+				<BR>
+<?php
+				echo strftime ( "%H:%M", strtotime($classhour->endhour));
+?>
+				</TD>
+		
+				<TD class="cell c1" colspan="7" rowspan="1"></TD>
+	
+				<TD class="cell c2" style="text-align: center;">
+					<input value="<?php echo get_string('deleteclasshour','block_timetable') ?>" type="submit"> &nbsp;
+				</TD>
+				</TR>
+			</form>
+<?php
+			$oldclasshour->starthour = $classhour->starthour;
+			$oldclasshour->endhour = $classhour->endhour;
+			$firsthour = false;	
+			
+		}
+?>
+</table>
+<?php
+}
+?>
+</div></div>
+
+<?php
+print_footer(get_record('course', 'id',$courseid));
+?>

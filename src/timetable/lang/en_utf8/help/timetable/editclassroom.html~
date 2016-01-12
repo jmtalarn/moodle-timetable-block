@@ -1,0 +1,35 @@
+<h1>Editing Classroom</h1>
+
+<p>From this page you can add, modify and delete the classrooms in the institution.</p>
+
+<p><b>Add a classroom</b> - from this section you can add a new classroom. <br>
+Only two parameters are necessary for add a new classroom:<br>
+	<ul>
+		<li><b>name</b> - the name used for identify the classroom from each other.</li>
+		<li><b>capacity</b> - the maximum classroom capacity considered for the space available.</li>
+	</ul>
+
+</p>
+
+<p><b>Edit classroom</b> - from this section you can modify or delete an existing classroom. <br>
+This is a list of all available classrooms. No classrooms available message wil be displayed if no classrooms were added.<br>
+Two actions can be token changing Action Commbo value
+	<ul>
+		<li><b>Update classroom</b> - the name and capacity can be modified by each row in list but only will be updated if this action is selected in Combo Action and Action Button is pressed.</li>
+		<li><b>Delete classroom</b> - the classroom will be deleted if this action is selected and Action Button is pressed. A confirm screen will ask you to confirm the action.</li>
+	</ul>
+
+</p>
+
+<p><b>Edit classroom IP addresses</b> - from this section you will be able to add the IP range used in the classroom. <br>
+In the first section you can take the same actions than in Edit classroom section but only for the classroom selected. In the second section a list of the IP addressess added will be shown (If no addresses were added a no IP addressess added text will be shown)  and you will be able to add a IP to range or delete it.
+	<ul>
+		<li><b>Add an IP</b> - an IP address can be added in the first section of this second section, typing it and pressing the Add IP button. If the IP hasn't a correct format a message will be shown.</li>
+		<li><b>Delete an IP</b> - below the section reserved to add, the IP range is showed. You can remove each one by pressing the Delete IP button </li>
+	</ul>
+	
+</p>
+
+
+
+

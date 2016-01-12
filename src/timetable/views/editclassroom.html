@@ -1,0 +1,97 @@
+<?php
+
+print_header_simple(get_string('editclassroom','block_timetable'),'',	get_string('editclassroom','block_timetable'),'','',false);		
+
+include('../tabs.php');
+?>
+<?php 
+/****************************/
+/*NEW CLASSROOM FORM*********/
+/****************************/
+?>
+<div class="sideblock">
+<form action = "../controller/ttcontroller.php?viewrequired=editclassroom" method = "POST">
+	<input type="hidden" name="sesskey" value="<?php echo $USER->sesskey ?>" >
+	<input type="hidden" name="courseid" value="<?php echo $courseid ?>" >
+	<input type="hidden" name="timetableid" value="<?php echo $timetableid ?>" >
+
+<input type="hidden" name="actionparam" value="add" >
+<div class="header">
+	<h3><?php echo get_string('addclassroom','block_timetable') ?></h3>
+</div>
+<div class="content">
+	<input type="hidden" name="classroomid">
+	<?php echo get_string('classroomname','block_timetable') ?><input type="text" name="classroomname"> &nbsp;
+	<?php echo get_string('classroomcapacity','block_timetable') ?><input size="7" type="text" name="classroomcapacity"> &nbsp;
+	<input value="<?php echo get_string('addnewclassroom','block_timetable') ?>" type="submit"> &nbsp;
+
+</div>
+</form>
+</div>
+<BR>
+
+
+<?php 
+/*******************************/
+/*DELETE CLASSROOM FORM*********/
+/*******************************/
+?>
+<div class="sideblock">
+<div class="header">
+	<h3><?php echo get_string('editclassroom','block_timetable') ?></h3>
+</div>
+<div class="content">
+<?php
+if ( $classrooms=='' ){
+	echo get_string('noclassrooms','block_timetable');
+	?>
+	<BR>
+<?php 
+}else{
+?>
+		<table class="flexible generaltable generalbox ">
+		<tbody>
+		 <tr>
+		 <th class="header c0" scope="col"><p><?php echo get_string('actiontype','block_timetable') ?></p></th>
+		 <th class="header c1" scope="col"><p><?php echo get_string('classroomid','block_timetable') ?></p></th>
+		 <th class="header c2" scope="col"><p><?php echo get_string('classroomname','block_timetable') ?></p></th>
+		 <th class="header c3" scope="col"><p><?php echo get_string('classroomcapacity','block_timetable') ?></p></th>
+		 <th class="header c4" scope="col"><p><?php echo get_string('action','block_timetable') ?></p></th>
+		 </tr>	
+<?php 
+		foreach ($classrooms as $classroom){
+?>	
+		<form action = "../controller/ttcontroller.php?viewrequired=editclassroom" method = "POST">
+		<input type="hidden" name="sesskey" value="<?php echo $USER->sesskey ?>" >
+		<input type="hidden" name="courseid" value="<?php echo $courseid ?>" >	
+		<input type="hidden" name="timetableid" value="<?php echo $timetableid ?>" >	
+		
+		<input type="hidden" name="actionparam" value="action" >
+		<input type="hidden" name="classroomid" value="<?php echo $classroom->id ?>">
+	
+		<tr>
+		<td class="cell c0">
+		<select name="actiontype">
+					<option selected value="update"><?php echo get_string('updateclassroom','block_timetable') ?></option>
+					<option value="delete"><?php echo get_string('deleteclassroom','block_timetable') ?></option>
+					<option value="editclassroomips"><?php echo get_string('editclassroomsips','block_timetable') ?></option>
+			  </select>
+		</td>
+		<td class="cell c1"><?php echo $classroom->id ?></td>
+		<td class="cell c2"><input type="text" name="classroomname" value="<?php echo $classroom->name ?>"></td>
+		<td class="cell c3"><input type="text" name="classroomcapacity" value="<?php echo $classroom->capacity ?>"></td>
+		<td class="cell c4"><input value="<?php echo get_string('actionclassroom','block_timetable') ?>" type="submit"></td>		
+		</form>
+		</tr>
+<?php
+		}
+?>
+		</tbody>
+		</table>
+<?php
+}
+?>
+</div></div>
+<?php 
+print_footer(get_record('course', 'id',$courseid));
+?>

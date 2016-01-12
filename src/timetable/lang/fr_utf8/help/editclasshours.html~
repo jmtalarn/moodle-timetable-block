@@ -1,0 +1,12 @@
+<h1>Modifier heures de classe</h1>
+
+<p>Dès cette page on peut ajouter et éliminer les heures de classe que cette institution est offrant.</p>
+<p><b>Ajouter une heure de classe</b> - dès cette section on peut ajouter une nouvelle heure de classe. <br>
+On doit introduire <b>heure de début</b> et <b>heure final</b> et cliquer le bouton <b>Ajouter une nouvelle heure de classe</b> et cette heure s' ajoutera à la liste du dessous.<br>
+<b>Heure final</b> elle doit être plus grande que <b>heure de début</b>, sinon sera montré un message d'erreur à la part supérieure de les sections.<br>
+Pour laps de temps de vingt minutes entre heures sera montrée une ligne blanche.<br>
+</p>
+
+<p><b>Éliminer heure de classe</b> - À la part inférieure de la section pour ajouter une heure de classe on trouvera une liste ordonnée des heures de classe ajoutées, sinon sera montré un message qui indiquera que n'ont pas été ajoutées les heures de classe. <br>
+Pour chaque rang il y a un bouton d'effacer.
+</p>

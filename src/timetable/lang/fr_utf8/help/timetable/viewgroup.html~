@@ -1,0 +1,11 @@
+<h1>Regardent les groupes</h1>
+
+<p>Dès cette page peut regarder les élèves enregistrets au groupe et le horaire de le groupe sélectionnet.</p>
+
+<p><b>Regarder le groupe de élèves</b> - sélectionnent un groupe au la combo et la action <b>regarder élève de le groupe</b> regarderá une liste de touts les élève enregistrets.<br>
+Si il à permissions peut exclurer le élève de le groupe.<br
+</p>
+<p><b>Regarder la table de heures de le groupe</b> - sélectionnent un groupe au la combo et la action <b>regarder la table de heures de le groupe</b> regarderá un horaire pour le groupe sélectionnet.<br>
+Vous se peut inscrire au le groupe sélectionnet.Si déjà se HA inscriret au le groupe se montrerá un message INDICANDOLO au le endroit de le bouton.<br>
+</p>
+ 

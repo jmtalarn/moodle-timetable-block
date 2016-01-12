@@ -1,0 +1,40 @@
+﻿<h1>Editando Grupos</h1>
+
+<p>Desde esta página se puede añadir, modificar y eliminar los grupos y sus horarios por cada curso de esta institución.</p>
+
+<p><b>Añadir un grupo</b> - desde esta sección puede añadir un nuevo grupo pulsando el botón <b>Añadir un nuevo grupo</b> . <br>
+Los parámetros necesarios para definir un grupo son:<br>
+	<ul>
+		<li><b>nombre</b> - el nombre se utiliza para identificar un grupo de entre los otros grupos.</li>
+		<li><b>número de alumnos</b> - el número máximo de alumnos permitidos para apuntarse al grupo.</li>
+		<li><b>cambio de grupo permitido</b> - el profesor puede decidir si un alumno puede borrarse del grupo él mismo o debe ser el profesor quién lo borre del grupo.</li>
+		<li><b>grupo común</b> - un grupo común es un grupo que una vez apuntado el usuario se puede apuntar en cualquier otro. <br/>
+		Para un grupo no común un usuario solo puede apuntarse en uno de ellos, y si el usuario escoje apuntarse en otro grupo será borrado del primer grupo. </li>
+	</ul>
+</p>
+
+<p><b>Editar grupo</b> - desde esta sección puede modificar o eliminar un grupo que ya existe. <br>
+Esta es una lista de todos los grupos disponibles. Si no hay grupos disponibles un mensaje será mostrado indicándolo.<br>
+Se pueden tomar cuatro tipos de acciones cambiando el valor de la combo de acción
+	<ul>
+		<li><b>Actualizar grupo</b> - Los parámetros nombre, el número de alumnos, cambio de grupo permitido y grupo común se pueden modificar por cada fila de la lista pero solo pueden ser actualizados si esta acción es seleccionada en la combo de acción y el botón de acción es pulsado.</li>
+		<li><b>Eliminar grupo</b> - el grupo puede ser eliminado si esta acción es seleccionada y el botón de acción pulsado. Un mensaje le pedirá que confirme la acción.</li>
+		<li><b>Añadir todos los alumnos del curso</b> - todos los alumnos del curso serán introducidos en la lista una vez el botón de acción sea pulsado. Un mensaje le pedirá que confirme la acción.</li>
+		<li><b>Editar una tabla de horas del grupo</b> - esta acción le lleva a la pantalla de edición del horario del grupo.</li>
+	</ul>
+
+</p>
+
+<p><b>Editar una tabla de horas del grupo</b> - desde esta sección puede modificar el horario del grupo seleccionado. <br>
+En la primera sección puede hacer las mismas acciones que en la sección de Edición de grupo pero solo para el grupo seleccionado.
+En la segunda sección hay una representación de la semana ( días de fin de semana en texto rojo) es mostrado con todas las horas que la institución está dando clases.
+Por cada una de estas casillas se pueden realizar una de estas dos acciones:
+	<ul>
+			<li><b>Añadir <img src="../../../icons/action_go.gif" width="16" height="16" title="Add action icon" ></b> - Si esta acción es posible se mostrará una combo con las aulas disponibles en la institución para esta hora.<br>
+						Una clase puede ser añadida seleccionando la aula apropiada y pulsando la icona añadir.<br>
+						Si la capacidad de la aula es menor que el número de alumnos que teníamos previsto un mensaje de alerta en color azul aparecerá en la sección superior y la clase será añadida en texto azul.<br>
+						Si la clase es añadida en un día considerado fin de semana un mensaje de alerta en color azul aparecerá en la sección superior y la clase será añadida en texto azul.
+			</li>
+			<li><b>Eliminar <img src="../../../icons/action_stop.gif" width="16" height="16" title="Delete action icon" ></b> - Si una clase fue añadida la puede eliminar pulsando la icona Eliminar.</li>
+	</ul>
+</p>

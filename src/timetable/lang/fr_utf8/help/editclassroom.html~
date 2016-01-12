@@ -1,0 +1,22 @@
+<h1>Modifier les salles de classe</h1>
+
+<p>Dès cette page on peut ajouter, modifier et éliminer les salles de classe de cette institution.</p>
+
+<p><b>Ajouter une salle de classe</b> - dès cette section on peut ajouter une nouvelle salle de classe. <br>
+Seulement sont nécessaires deux paramètres pour ajouter une nouvelle salle de classe:<br>
+	<ul>
+		<li><b>prénom</b> - le prénom s'utilise pour identifier chacune des salles de classe.</li>
+		<li><b>capacité</b> - la maximum capacité de les salles de classe suivant l'espace disponible.</li>
+	</ul>
+
+</p>
+
+<p><b>Modifier salle de classe</b> - dès cette section on peut modifier ou éliminer une salle de classe qui existe déjà. <br>
+Cette est une liste de toutes les salles de classe disponibles. S'ils n'ont pas été ajoutées salles de classe apparaîtra un message en montrant qu'il n'y a pas des salles de classe disponibles.<br>
+On peut faire deux actions en changeant la valeur de la combo action.
+	<ul>
+		<li><b>Actualiser salle de classe</b> - le prénom et la capacité peuvent être modifiés pour chaque rang de la liste mais seulement peuvent être actualisés si cette action est choisie à la combo d'action et le bouton d'action est poussé.</li>
+		<li><b>Éliminer salle de classe</b> - la salle de classe peut être effacée si cette action est sélectionnée et le bouton d'action est poussé. Un écran lui demandera que confirme l'action.</li>
+	</ul>
+
+</p>

@@ -1,0 +1,40 @@
+﻿<h1>Editant Grups</h1>
+
+<p>Des d'aquesta pàgina es pot afegir, modificar i eliminar els grups i els seus horaris per cada curs d'aquesta institució.</p>
+
+<p><b>Afegir un grup</b> - des d'aquesta secció pot afegir un nou grup apretant el botó <b>Afegir un nou grup</b> . <br>
+Els paràmetres necessaris per definir un grup són:<br>
+	<ul>
+		<li><b>nom</b> - el nom s'utilitza per identificar un grup d'entre els altres grups.</li>
+		<li><b>número d'alumnes</b> - el número màxim d'alumnes permesos per apuntar-se al grup.</li>
+		<li><b>canvi de grup permès</b> - el professor pot decidir si un alumne pot esborrar-se del grup ell mateix o ha de ser el professor qui l'esborri del grup.</li>
+		<li><b>grup comú</b> - un grup comú és un grup que un cop apuntat l'usuari es pot apuntar a qualsevol altre. <br/>
+		Per un grup no comú un usuari només pot apuntar-se en un d'ells, i si l'usuari escull apuntar-se a un altre grup serà esborrat del primer grup. </li>
+	</ul>
+</p>
+
+<p><b>Editar grup</b> - des d'aquesta secció pot modificar o eliminar un grup que ja existeix. <br>
+Aquesta és una llista de tots els grups disponibles. Si no hi ha grups disponibles un missatge serà mostrat indicant-ho.<br>
+Es poden pendre quatre tipus d'accions canviant el valor de la combo d'acció
+	<ul>
+		<li><b>Actualitzar grup</b> - Els paràmetres nom, el número d'alumnes, canvi de grup permès i grup comú es poden modificar per cada fila de la llista però només poden ser actualitzats si aquesta acció és seleccionada a la combo d'acció i el botó d'acció és apretat.</li>
+		<li><b>Eliminar grup</b> - el grup pot ser eliminat si aquesta acció és seleccionada i el botó d'acció apretat. Un missatge li demanarà que confirmi l'acció.</li>
+		<li><b>Afegir tots els estudiants del curs</b> - tots els alumnes del curs seran introduits a la llista un cop el botó d'acció sigui pressionat. Un missatge li demanarà que confirmi l'acció.</li>
+		<li><b>Editar una taula d'hores del grup</b> - aquesta acció et porta a la pantalla d'edició de l'horari del grup.</li>
+	</ul>
+
+</p>
+
+<p><b>Editar una taula d'hores del grup</b> - des d'aquesta secció pot modificar l'horari del grup seleccionat. <br>
+A la primera secció pot fer les mateixes accions que a la secció d'Edició de grup però només pel grup seleccionat.
+A la segona secció hi ha una representació de la setmana ( dies de cap de setmana en text vermell) és mostrat amb totes les hores que la institució està donant classes.
+Per cadascuna d'aquestes caselles es poden fer una d'aquestes dues accions:
+	<ul>
+			<li><b>Afegir <img src="../../../icons/action_go.gif" width="16" height="16" title="Add action icon" ></b> - Si aquesta acció és possible un combo amb les aules disponibles a la institució per aquesta hora es mostren.<br>
+						Una classe pot ser afegida seleccionant l'aula apropiada i clicant l'icona afegir.<br>
+						Si la capacitat de l'aula és menor que el número d'alumnes que teniem previst un missatge d'alerta en color blau apareixerà a la secció superior i la classe serà afegida en text blau.<br>
+						Si la classe és afegida en un dia considerat cap de setmana un missatge d'alerta en color blau apareixerà a la secció superior i la classe serà afegida en text blau.
+			</li>
+			<li><b>Eliminar <img src="../../../icons/action_stop.gif" width="16" height="16" title="Delete action icon" ></b> - Si una classe va ser afegida la pot eliminar clicant la icona Eliminar.</li>
+	</ul>
+</p>

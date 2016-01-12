@@ -1,0 +1,126 @@
+<?php
+
+
+print_header_simple(get_string('editgroup','block_timetable'),'',	get_string('editgroup','block_timetable'),'','',false);		
+
+include('../tabs.php');
+?>
+<?php
+		/****************************/
+		/*NEW GROUP FORM*********/
+		/****************************/
+?>
+<div class="sideblock">
+<div class="header">
+	<h3><?php echo  get_string('addgroup','block_timetable') ?></h3>
+</div>
+<div class="content">
+	<form action = "../controller/ttcontroller.php?viewrequired=editgroup" method = "POST">
+		<input type="hidden" name="sesskey" value="<?php echo $USER->sesskey ?>" >
+		<input type="hidden" name="courseid" value="<?php echo $courseid ?>" >	
+		<input type="hidden" name="timetableid" value="<?php echo $timetableid ?>" >
+		
+		<TABLE style="text-align: left;">
+		
+		<TR>
+			<TD>
+				<input type="hidden" name="actionparam" value="add" >
+			</TD>
+			<TD>
+				<input type="hidden" name="groupid">
+				<?php echo get_string('groupname','block_timetable')?><input type="text" name="groupname"> &nbsp;
+			</TD>
+			<TD>
+				<?php echo  get_string('groupstudentsnumber','block_timetable') ?><input size="7" type="text" name="groupstudentsnumber"> &nbsp;
+			</TD>
+			<TD>
+				<input name="groupchangeallowed" type="checkbox" value="1" checked="checked" />
+				<?php echo  get_string('groupchangeallowed','block_timetable') ?>
+				<BR>
+				<input name="commongroup" type="checkbox" value="1" />
+				<?php echo  get_string('commongroup','block_timetable') ?>
+				<BR>
+			</TD>
+			<TD>
+				<input value="<?php echo get_string('addnewgroup','block_timetable')?>" type="submit"> &nbsp;
+			</TD>
+		</TR>
+		</TABLE>
+		</form>
+		<BR>
+		</div></div>
+<?php
+		/*******************************/
+		/*EDIT GROUP FORM*********/
+		/*******************************/		
+?>
+		<div class="sideblock">
+		<div class="header">
+			<h3><?php echo  get_string('editgroup','block_timetable') ?></h3>
+		</div>
+		<div class="content">
+<?php
+		if ( $groups=='' ){
+			echo get_string('nogroups','block_timetable');
+			?>
+			<BR>
+<?php
+		}else{
+?>
+				<table class="flexible generaltable generalbox ">
+				<tbody>
+				 <tr>
+				 	<th class="header c0" scope="col"><P><?php echo get_string('actiontype','block_timetable') ?></P></th>
+				 	<th class="header c1" scope="col"><P><?php echo get_string('groupid','block_timetable') ?></P></th>
+				 	<th class="header c2" scope="col"><P><?php echo get_string('groupname','block_timetable') ?></P></th>
+				 	<th class="header c3" scope="col"><P><?php echo get_string('groupstudentsnumber','block_timetable') ?></P></th>
+				 	<th class="header c4" scope="col"><P><?php echo get_string('groupchangeallowed','block_timetable') ?></P></th>
+				 	<th class="header c5" scope="col"><P><?php echo get_string('commongroup','block_timetable') ?></P></th>
+					<th class="header c6" scope="col"><P><?php echo get_string('action','block_timetable') ?></P></th>
+				 </tr>	
+			
+<?php 		
+				foreach ($groups as $group){
+?>				
+				<form action = "../controller/ttcontroller.php?viewrequired=editgroup" method = "POST">
+				<input type="hidden" name="sesskey" value="<?php echo $USER->sesskey ?>" >
+				<input type="hidden" name="courseid" value="<?php echo $courseid ?>" >
+				<input type="hidden" name="timetableid" value="<?php echo $timetableid ?>" >		
+				
+				<input type="hidden" name="actionparam" value="action" >
+				<input type="hidden" name="groupid" value="<?php echo $group->id ?>">
+				<tr>
+					<td class="cell c0">
+						<select name="actiontype">
+								<option selected value="update"><?php echo  get_string('updategroup','block_timetable') ?></option>
+								<option value="delete"><?php echo get_string('deletegroup','block_timetable') ?></option>
+								<option value="edithourtable"><?php echo  get_string('edithourtablegroup','block_timetable') ?></option>
+								<option value="addallcoursestudents"><?php echo  get_string('addallcoursestudents','block_timetable') ?></option>		
+						</select>
+					</td>
+					<td class="cell c1"><?php echo $group->id ?></td>
+					<td class="cell c2"><input type="text" name="groupname" value="<?php echo $group->name ?>"></td>
+					<td class="cell c3"><input type="text" name="groupstudentsnumber" value="<?php echo $group->studentsnumber ?>"></td>
+					<td class="cell c4"><input type="checkbox" name="groupchangeallowed" value="1" 
+					     <?php if (($group->changeallowed)==1){ echo 'checked="checked"'; } ?>	 />
+					</td>
+					<td class="cell c5"><input type="checkbox" name="commongroup" value="1" 
+						 <?php if (($group->commongroup)==1){ echo 'checked="checked"';} ?> />
+					</td>
+					<td class="cell c6"><input value="<?php echo get_string('actiongroup','block_timetable') ?>" type="submit"></td>		
+				</tr>
+				</form>
+<?php
+				}
+?>
+				</tbody>
+				</table>
+<?php
+		}
+?>
+		</div></div>
+
+
+<?php
+print_footer(get_record('course', 'id',$courseid));
+?>

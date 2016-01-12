@@ -1,0 +1,160 @@
+<?php
+print_header_simple(get_string('editgroup','block_timetable'),'',get_string('editgroup','block_timetable'),'','',false);		
+
+include('../tabs.php');
+?>
+<div class="sideblock">
+<div class="header">
+<h3><?php echo get_string('editgrouptable','block_timetable') ?></h3>
+</div>
+<div class="content">
+<?php //TAULA DEL GRUP CONCRET ?>
+<table style="text-align: left; width: 100%;" class="flexible generaltable generalbox ">
+<tbody>
+	<tr>
+	 <th class="header c0" scope="col"><p><?php echo get_string('actiontype','block_timetable') ?></p></th>
+	 <th class="header c0" scope="col"><p><?php echo get_string('groupid','block_timetable') ?></p></th>
+	 <th class="header c0" scope="col"><p><?php echo get_string('groupname','block_timetable') ?></p></th>
+	 <th class="header c0" scope="col"><p><?php echo get_string('groupstudentsnumber','block_timetable') ?></p></th>
+	 <th class="header c0" scope="col"><p><?php echo get_string('groupchangeallowed','block_timetable') ?></p></th>
+	 <th class="header c0" scope="col"><p><?php echo get_string('action','block_timetable') ?></p></th>
+	</tr>
+<form action = "../controller/ttcontroller.php?viewrequired=editgroup" method = "POST">
+<input type="hidden" name="sesskey" value="<?php echo $USER->sesskey ?>" >
+<input type="hidden" name="courseid" value="<?php echo $courseid ?>" >
+<input type="hidden" name="timetableid" value="<?php echo $timetableid ?>" >
+
+<input type="hidden" name="actionparam" value="action" >
+<input type="hidden" name="groupid" value="<?php echo $group->id ?>">
+<tr>
+<td>
+<select name="actiontype">
+			<option value="update"><?php echo get_string('updategroup','block_timetable') ?></option>
+			<option value="delete"><?php echo get_string('deletegroup','block_timetable') ?></option>
+			<option selected value="edithourtable"><?php echo get_string('edithourtablegroup','block_timetable') ?></option>
+			<option value="addallcoursestudents"><?php echo get_string('addallcoursestudents','block_timetable') ?></option>
+	  </select>
+</td>
+<td><?php echo $group->id  ?></td>
+<td><input type="text" name="groupname" value="<?php echo $group->name ?>"></td>
+<td><input type="text" name="groupstudentsnumber" value="<?php echo $group->studentsnumber ?>"></td>
+<td><input type="checkbox" name="groupchangeallowed" value="1" <?php if (($group->changeallowed)==1){ echo ' checked="checked" '; }?>	 />	
+</td>
+<td><input value="<?php echo get_string('actiongroup','block_timetable') ?>" type="submit"></td>			
+</tr>
+</form>
+</tbody>
+</table>
+
+<?php //TAULA DE HORARIS ?>
+
+<BR>
+
+
+<?php 
+if ( $validhours=='' ){
+	echo get_string('noclasshoursforgroup','block_timetable');
+?>
+	<BR>
+<?php 
+}else{
+?>
+	<table class="flexible generaltable generalbox " >
+
+	<tr>
+	<TH class="header c0" scope="col"><p></p></TH>
+<?php 
+	//WEEKDAYS HEADER 
+
+	for($i = $display->minwday; $i <= $display->maxwday; ++$i) {
+	 // This uses the % operator to get the correct weekday no matter what shift we have
+	 // applied to the $display->minwday : $display->maxwday range from the default 0 : 6		
+		if(CALENDAR_WEEKEND & (1 << ($i % 7))) {
+?>
+			<th class="header" style="text-align: center;color:red; width: 95px;"  scope="col">
+	        <?php echo  get_string($CALENDARDAYS[$i % 7], 'calendar') ?>
+			<BR>
+			</th>
+<?php 		
+		}else{  
+?>
+	        <th class="header" style="text-align: center;width: 95px;"  scope="col">
+	        <?php echo  get_string($CALENDARDAYS[$i % 7], 'calendar') ?>
+			<BR>
+			</th>
+<?php 
+		}
+	}
+?>
+	</tr>
+<?php 	
+	//HOURS DISPONIBLE
+		$firsthour = true;
+	
+		foreach ($validhours as $validhour){
+			if(!$firsthour){
+				$diferencia = ((strtotime($validhour->starthour))-(strtotime($oldvalidhour->endhour)));
+				if ($diferencia>=1200 ){
+					for ($i = 0; $i < $diferencia; ($i=$i+1200)) {
+?>     					
+     					<TR><TD class="cell c0" rowspan="1"></TD><TD class="cell c1" rowspan="1"></TD><TD class="cell c2" rowspan="1"></TD>
+     						<TD class="cell c3" rowspan="1"></TD><TD class="cell c4" rowspan="1"></TD><TD class="cell c5" rowspan="1"></TD>
+     						<TD class="cell c6" rowspan="1"></TD><TD class="cell c7" rowspan="1"></TD></TR>
+<?php 
+ 					}
+ 				}
+			}
+?>
+			<TR>
+				<TD class="cell c0" style="text-align: center;width: 95px;">
+				<?php echo  strftime ( "%H:%M", strtotime($validhour->starthour)) ?>
+				<BR>
+				<?php echo  strftime ( "%H:%M", strtotime($validhour->endhour)) ?>
+				</TD>
+<?php 
+				for($i = $display->minwday; $i <= $display->maxwday; ++$i) {
+					//S'ha de canviar la get_record per la get_record_select --> get_record_select($table, $select=, $fields='*')
+					$selectclause =  "starthour='" .$validhour->starthour."' AND endhour='".$validhour->endhour."' AND weekday='" . $i ."' AND groupid = " . $group->id . "";
+					if (record_exists_select('timetable_hourtable', $selectclause)){ 
+?>
+						<TD class="cell" style="text-align: right;">
+							<?php print_classhour_delete_form($courseid,$sesskey,$timetableid,$validhour,$i,$group,(CALENDAR_WEEKEND & (1 << ($i % 7)))) ?>
+						</TD>
+<?php
+					}else{
+?>
+						<TD class="cell" style="text-align: right;">
+							<?php print_classhour_add_form($courseid,$sesskey,$timetableid,$validhour,$i,$group,(CALENDAR_WEEKEND & (1 << ($i % 7)))) ?>
+						</TD>
+<?php 
+					}	
+
+				}
+?>
+			</TR>
+<?php 
+			$oldvalidhour->starthour = $validhour->starthour;
+			$oldvalidhour->endhour = $validhour->endhour;
+			$firsthour = false;	
+			
+		}
+?>
+		</table><BR><BR>
+		
+		<table style="text-align: left; width: 100%; height: 16px;" border="0" cellpadding="2" cellspacing="2">
+  		<tbody><tr>
+  		<td style="background-color: rgb(51, 51, 255); height: 16px; width: 32px;"></td>
+      	<td>
+			<?php echo get_string('someclassesinbluewithwarningmessages','block_timetable') ?>
+		</td>
+    	</tr></tbody></table>
+</div>
+		
+
+		
+<?php 
+	
+} //End Else
+
+print_footer(get_record('course', 'id',$courseid));
+?>

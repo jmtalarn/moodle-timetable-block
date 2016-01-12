@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/timetable/db" VERSION="20080423" COMMENT="XMLDB file for Moodle blocks/timetable"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="timetable_hours" COMMENT="timetable_hours table retrofitted from MySQL" NEXT="timetable_classroom">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="starthour"/>
+		<FIELD NAME="starthour" TYPE="char" LENGTH="5" NOTNULL="true" SEQUENCE="false" ENUM="false" NEXT="endhour" PREVIOUS="id" />
+        <FIELD NAME="endhour" TYPE="char" LENGTH="5" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="starthour"/>
+      </FIELDS>
+      <KEYS> 
+		<KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Key for id for timetable_hours" NEXT="starthourendhour"/>  
+        <KEY NAME="starthourendhour" TYPE="unique" FIELDS="starthour, endhour" COMMENT="Primary key for timetable_hours" PREVIOUS="primary" />
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="timetable_classroom" COMMENT="timetable_classroom table retrofitted from MySQL" PREVIOUS="timetable_hours" NEXT="timetable">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="capacity"/>
+        <FIELD NAME="capacity" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="capacity"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for timetable_classroom"  />
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="timetable" COMMENT="timetable table retrofitted from MySQL" PREVIOUS="timetable_classroom" NEXT="timetable_group">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" ENUM="false" SEQUENCE="true" NEXT="instanceid"/>
+		<FIELD NAME="instanceid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" ENUM="false" SEQUENCE="false" PREVIOUS="id" NEXT="courseid"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" ENUM="false" PREVIOUS="instanceid" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="courseid"/>
+      </FIELDS>
+      <KEYS>
+	    <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for timetable" NEXT="timetablecourseid" />
+		<KEY NAME="timetablecourseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id" PREVIOUS="primary" NEXT="instanceid" />
+		<KEY NAME="instanceid" TYPE="unique" FIELDS="instanceid" COMMENT="Instance key for timetable"  PREVIOUS="timetablecourseid"/>
+      </KEYS>
+      <!--INDEXES>
+        <INDEX NAME="courseid" UNIQUE="false" FIELDS="courseid"/>
+      </INDEXES-->
+    </TABLE>
+    <TABLE NAME="timetable_group" COMMENT="timetable_group table retrofitted from MySQL" PREVIOUS="timetable" NEXT="timetable_users">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="timetableid"/>
+        <FIELD NAME="timetableid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="studentsnumber"/>
+        <FIELD NAME="studentsnumber" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="timetableid" NEXT="changeallowed"/>
+        <FIELD NAME="changeallowed" TYPE="int" LENGTH="1" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" ENUM="false" PREVIOUS="studentsnumber" NEXT="commongroup"/>
+        <FIELD NAME="commongroup" TYPE="int" LENGTH="1" NOTNULL="false" UNSIGNED="false" SEQUENCE="false" ENUM="false" PREVIOUS="changeallowed" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="commongroup"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for timetable_group" NEXT="grouptimetableid"/>
+		<KEY NAME="grouptimetableid" TYPE="foreign" FIELDS="timetableid" REFTABLE="timetable" REFFIELDS="id" PREVIOUS="primary" />
+      </KEYS>
+      <!--INDEXES>
+        <INDEX NAME="timetableid" UNIQUE="false" FIELDS="timetableid"/>
+      </INDEXES-->
+    </TABLE>
+    <TABLE NAME="timetable_users" COMMENT="timetable_users table retrofitted from MySQL" PREVIOUS="timetable_group" NEXT="timetable_hourtable">
+      <FIELDS>
+	    <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="groupid"/>  
+        <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" ENUM="false" NEXT="userid" PREVIOUS="id"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" ENUM="false" PREVIOUS="groupid"/>
+      </FIELDS>
+      <KEYS>
+		<KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Key for id for timetable_hours" NEXT="groupiduserid"/>    
+        <KEY NAME="groupiduserid" TYPE="unique" FIELDS="groupid, userid" COMMENT="Primary key for timetable_users" NEXT="usergroupid" PREVIOUS="primary"/>
+		<KEY NAME="usergroupid" TYPE="foreign" FIELDS="groupid" REFTABLE="timetable_group" REFFIELDS="id" PREVIOUS="groupiduserid" NEXT="useruserid" />
+		<KEY NAME="useruserid" TYPE="foreign" FIELDS="userid" REFTABLE="users" REFFIELDS="id" PREVIOUS="usergroupid" />
+      </KEYS>
+      <!--INDEXES>
+        <INDEX NAME="userid" UNIQUE="false" FIELDS="userid"/>
+      </INDEXES-->
+    </TABLE>
+    <TABLE NAME="timetable_hourtable" COMMENT="timetable_hourtable table retrofitted from MySQL" PREVIOUS="timetable_users" NEXT="timetable_classroomip">
+      <FIELDS>
+         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="starthour"/>
+		<FIELD NAME="starthour" TYPE="char" LENGTH="5" NOTNULL="true" SEQUENCE="false" ENUM="false" NEXT="weekday" PREVIOUS="id" />
+        <FIELD NAME="weekday" TYPE="char" LENGTH="1" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="starthour" NEXT="classroomid"/>
+        <FIELD NAME="classroomid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" ENUM="false" PREVIOUS="weekday" NEXT="endhour"/>
+        <FIELD NAME="endhour" TYPE="char" LENGTH="5" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="classroomid" NEXT="groupid"/>
+        <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" ENUM="false" PREVIOUS="endhour" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="groupid"/>
+      </FIELDS>
+      <KEYS>
+		<KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Key for id for timetable_hours" NEXT="swgce"/>    
+        <KEY NAME="swgce" TYPE="unique" FIELDS="starthour, weekday, groupid, classroomid, endhour" COMMENT="Primary key for timetable_hourtable" NEXT="starthourendhour" PREVIOUS="primary"/>
+		<KEY NAME="starthourendhour" TYPE="foreign" FIELDS="starthour,endhour" REFTABLE="timetable_hours" REFFIELDS="starthour,endhour" PREVIOUS="swgce" NEXT="hourtableclassroomid"/>
+		<KEY NAME="hourtableclassroomid" TYPE="foreign" FIELDS="classroomid" REFTABLE="timetable_classroom" REFFIELDS="id" PREVIOUS="starthourendhour" NEXT="hourtablegroupid" />
+		<KEY NAME="hourtablegroupid" TYPE="foreign" FIELDS="groupid" REFTABLE="timetable_group" REFFIELDS="id" PREVIOUS="hourtableclassroomid"/>
+      </KEYS>
+      <!--INDEXES>
+        <INDEX NAME="classroomid" UNIQUE="false" FIELDS="classroomid" NEXT="starthour"/>
+        <INDEX NAME="starthour" UNIQUE="false" FIELDS="starthour, endhour" PREVIOUS="classroomid" NEXT="groupid"/>
+        <INDEX NAME="groupid" UNIQUE="false" FIELDS="groupid" PREVIOUS="starthour"/>
+      </INDEXES-->
+    </TABLE>
+	<TABLE NAME="timetable_classroomip" COMMENT="timetable_classroomip" PREVIOUS="timetable_hourtable" NEXT="timetable_hourtable_log" >
+		<FIELDS>
+		    <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="classroomid"/>
+			<FIELD NAME="classroomid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" NEXT="ip" PREVIOUS="id"/>
+			<FIELD NAME="ip" TYPE="char" LENGTH="15" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="classroomid"/>
+		</FIELDS>
+		<KEYS>
+			<KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Key for id for timetable_hours" NEXT="classroomidip"/>  
+			<KEY NAME="classroomidip" TYPE="unique" FIELDS="classroomid,ip" NEXT="classroomipclassroom" PREVIOUS="primary"/>
+			<KEY NAME="classroomipclassroom" TYPE="foreign" FIELDS="classroomid" REFTABLE="timetable_classroom" REFFIELDS="id" PREVIOUS="classroomidip" />
+		</KEYS>
+	</TABLE>
+	<TABLE NAME="timetable_hourtable_log" COMMENT="timetable_hourtable_log" PREVIOUS="timetable_classroomip" NEXT="timetable_classroomip_log" >
+		<FIELDS>
+			<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="starthour"/>
+			<FIELD NAME="starthour" TYPE="char" LENGTH="5" NOTNULL="true" SEQUENCE="false" ENUM="false" NEXT="weekday" PREVIOUS="id" />
+        <FIELD NAME="weekday" TYPE="char" LENGTH="1" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="starthour" NEXT="classroomid"/>
+        <FIELD NAME="classroomid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" ENUM="false" PREVIOUS="weekday" NEXT="endhour"/>
+        <FIELD NAME="endhour" TYPE="char" LENGTH="5" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="classroomid" NEXT="groupid"/>
+        <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" ENUM="false" PREVIOUS="endhour" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" ENUM="false" PREVIOUS="groupid" NEXT="data"/>
+		<FIELD NAME="data" TYPE="char" LENGTH="10" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="name" />
+      </FIELDS>
+		    <KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Key for id for timetable_hours" NEXT="swgced"/>   
+				<KEY NAME="swgced" TYPE="unique" FIELDS="starthour, weekday, groupid, classroomid, endhour,data" COMMENT="Primary key for timetable_hourtable"  PREVIOUS="primary"/>
+			</KEYS>
+	</TABLE>
+	<TABLE NAME="timetable_classroomip_log" COMMENT="timetable_classroomip_log" PREVIOUS="timetable_hourtable_log">
+		<FIELDS>
+			<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="hourtable_log_id"/>
+			<FIELD NAME="hourtable_log_id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="ip"/>
+			<FIELD NAME="ip" TYPE="char" LENGTH="15" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" PREVIOUS="hourtable_log_id"/>
+		</FIELDS>
+		<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Key for id for timetable_hours" NEXT="hliip"/>   
+				<KEY NAME="hliip" TYPE="unique" FIELDS="hourtable_log_id,ip" COMMENT="Primary key for timetable_classroom"  PREVIOUS="primary"/>
+		</KEYS>
+	</TABLE>
+  </TABLES>
+</XMLDB>

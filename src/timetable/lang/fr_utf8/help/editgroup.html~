@@ -1,0 +1,38 @@
+<h1>Modifier Groupes</h1>
+
+<p>Dès cette page on peut ajouter, modifier et éliminer les groupes et ses horaires pour chaque cours de cette institution.</p>
+
+<p><b>Ajouter un groupe</b> - dès cette section on peut ajouter un nouveau groupe en appuyant sur le bouton <b>Ajouter un nouveau groupe</b> . <br>
+Les paramètres nécessaires pour définir un groupe sont:<br>
+	<ul
+		<li><b>nom</b> - le nom s'utilise pour identifier un groupe parmi les autres groupes.</li>
+		<li><b>nombre d'élèves</b> - le nombre maximum d'élèves autorisés pour s'inscrire au groupe.</li>
+		<li><b>changement de groupe autorisé</b> - le professeur peut décider si un élève peut s'effacer du groupe il même ou doit être le professeur qui l'efface du groupe.</li>
+		<li><b>groupe commun</b> - un groupe commun est un groupe que une fois l'usager est immatriculé il peut s'inscrire au n' importe qu'autre. <br/>
+		Pour un groupe non commun un usager seulement peut être enregistré à un de d'eux, et si l' usager choisit être enregistré à un autre groupe il será effacé du premier groupe. </li>
+	</ul>
+</p>
+
+<p><b>Modifier grope</b> - dès cette section on peut modifier ou éliminer un groupe que déjà existe. <br>
+Cette est une liste de touts les groupes disponibles. S'il n'y a pas des groupes disponibles un message sera montré en l'indiquant.<br>
+Ils peuvent être déterminés quatre types d'actions en changeant la valeur de la combo d'action.
+	<ul>
+		<li><b>Actualiser groupe</b> - Les paramètres nom, le nombre d'élèves, changement de groupe permis et groupe commun peuvent être modifiés pour chaque rang de la liste mais ils seulement peuvent être actualisés si cette participation est choisie à la combo participation et le bouton de participation est poussé.</li>
+		<li><b>Éliminer groupe</b> - le groupe peut être éliminé si cette participation est selectionné et le bouton d' action poussé. Un message lui demandera que confirme l'action.</li>
+		<li><b>Ajouter tous les étudiants du cours</b> - tous les étudiants du cours seront introduits à la liste une fois le bouton de participation est poussé. Un message lui demandera que confirme la participation.</li>
+		<li><b>Modifier une table d'heures du groupe</b> - cette action te porte vers l' écran d' édition de l'horaire du groupe.</li>
+	</ul>
+
+</p><p><b>Modifier une table d'heures du groupe</b> - dès cette section on peut modifier l'horaire du groupe choisit. <br>
+À la première section on peut faire les mêmes actions que à la section d'Édition de groupe mais seulement pour le groupe selectionné.
+À la seconde section il y a une représentation de la semaine ( jours de week-end en texte rouge) est montré avec toutes les heures que l'institution donne des cours.
+Pour chaque casier on peut faire une de cette deux actions:
+	<ul>
+			<li><b>Ajouter <img src="../../../icons/action_go.gif" width="16" height="16" title="Add action icon" ></b> - Si cette action est possible un combo avec les salles de classe disponibles a l'institution pour cette heure sont montrées.<br>
+						Une classe peut être ajouter en choisissant la salle de classe approprié et en cliquant l'icône ajouter.<br>
+						Si la capacité de la salle de classe est plus petite que le nombre d'élèves que nous avions prévu, un message d'alerte en couleur bleu apparaîtra à la section supérieure et la classe sera ajoutée en texte bleu.<br>
+						Si la classe est ajoutée à un jour considéré week-end, un message d' alerte au couleur bleu apparaîtra à la section supérieure et la classe sera ajoutée en texte bleu.
+			</li>
+			<li><b>Éliminer <img src="../../../icons/action_stop.gif" width="16" height="16" title="Delete action icon" ></b> - Si une classe a été joindre on peut l'éliminer appuyent sur l'icône Éliminer.</li>
+	</ul>
+</p>

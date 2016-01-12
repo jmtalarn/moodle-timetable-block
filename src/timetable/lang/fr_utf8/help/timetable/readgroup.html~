@@ -1,0 +1,17 @@
+<h1>En regardent les groupes</h1>
+
+<p>Dès cette page on peut regarder les élèves enregistrés au groupe et l'horaire du groupe sélectionné.</p>
+
+<p><b>Regarder le groupe d'élèves</b> - en choisissant un groupe à la combo et l'action <b>regarder élève du groupe</b> observera une liste de tous les élèves enregistrés.<br>
+S'il à permissions peut exclurer l' élève du groupe.<br
+</p>
+<p><b>Regarder la table d'heures du groupe</b> - en choisissant un groupe à la combo et l'action <b>regarder la table d'heures du groupe</b> observera un horaire pour le groupe sélectionné.<br>
+Vous pouvez vous inscrire au groupe choisi.Si est déjà inscrit au groupe on montrera un message en l' indiquant au lieu du bouton.<br>
+</p>
+<p><b>Regarder la présence du groupe</b> - sélectionnent un groupe au la combo et la action <b>regarder la présence du groupe</b> regarderá la présence des élèves enregistres au groupe and son IP pour chaque fois que l'élève est connecté pour la derniere semaine au cette Moodle site.<br>
+Des professeurs peuvent modifier le rang des dates avec des date combos pour cette section. <br>
+Chaque classe pour cette groupe se montrerá avec la date, moment et le nom de la salle de classe (l'id de la salle de classe pour omissionde le nom) et une liste d'élèves in a matrice vue.
+Un message defini se montrerá pour aucune connection sur le site Moodle, rouge IP si l'adresse IP ne c'est pas valide pour la classe au le moment vue a la file de tete, et noir IP pour une correte connection (assumer pour une connection correte une IP dans le rang de la classe pour cette moment).<br>
+</p>
+
+ 

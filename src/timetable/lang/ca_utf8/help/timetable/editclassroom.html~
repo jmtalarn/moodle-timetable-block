@@ -1,0 +1,31 @@
+<h1>Editant les aules</h1>
+
+<p>Des d'aquesta pàgina pot afegir, modificar i eliminar les aules d'aquesta institució.</p>
+
+<p><b>Afegir una aula</b> - des d'aquesta secció pot afegir una nova aula. <br>
+Només són necessaris dos paràmetres per afegir una nova aula:<br>
+	<ul>
+		<li><b>nom</b> - el nom s'ultilitza per identificar cadascuna de les aules.</li>
+		<li><b>capacitat</b> - la màxima capacitat de les aules segons l'espai disponible.</li>
+	</ul>
+
+</p>
+
+<p><b>Editar aula</b> - des d'aquesta secció pot modificar o eliminar una aula que ja existeix. <br>
+Aquesta és una llista de totes les aules disponibles. Si no s'han afegit aules apareixerà un missatge mostrant que no hi han aules disponibles.<br>
+Es poden fer dos accions canviant el valor de la combo d'acció.
+	<ul>
+		<li><b>Actualitzar aula</b> - el nom i la capacitat poden ser modificats per cada fila de la llista però només pot ser actualitzat si aquesta acció és seleccionada a la combo d'acció i el botó d'acció és apretat.</li>
+		<li><b>Eliminar aula</b> - l'aula pot ser eliminada si aquesta acció és seleccionada i el botó d'acció és apretat. Una pantalla li demanarà que confirmi l'acció.</li>
+	</ul>
+
+</p>
+
+<p><b>Edit classroom IP addresses</b> - from this section you will be able to add the IP range used in the classroom. <br>
+In the first section you can take the same actions than in Edit classroom section but only for the classroom selected. In the second section a list of the IP addressess added will be shown (If no addresses were added a no IP addressess added text will be shown)  and you will be able to add a IP to range or delete it.
+	<ul>
+		<li><b>Add an IP</b> - an IP address can be added in the first section of this second section, typing it and pressing the Add IP button. If the IP hasn't a correct format a message will be shown.</li>
+		<li><b>Delete an IP</b> - below the section reserved to add, the IP range is showed. You can remove each one by pressing the Delete IP button </li>
+	</ul>
+	
+</p>
